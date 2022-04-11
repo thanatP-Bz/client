@@ -1,35 +1,44 @@
 import React, { useState, useReducer } from "react";
+import Modal from "./Modal";
 import { info } from "./data";
 
 const Test = () => {
   const [userName, setUserName] = useState("");
   const [people, setPeople] = useState(info);
-  const [showModel, setShowModel] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
-  const onSubmit = (e) => {
+  const handlerSubmit = (e) => {
     e.preventDefault();
+    if (userName) {
+      setPeople([...people, { id: Math.random().toString(), userName }]);
+      setShowModal(!showModal);
+      setUserName("");
+    }
+    setShowModal(!showModal);
   };
 
   const handlerChange = (e) => {
-    console.log(e.target);
+    setUserName(e.target.value);
   };
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+      {showModal && <Modal />}
+      <form onSubmit={handlerSubmit}>
         <input
           type="text"
-          value={userName.name}
+          value={userName}
           name="username"
           onChange={handlerChange}
         />
         <button type="sumit">click</button>
       </form>
-      {info.map((person) => {
-        const { name, age } = person;
+      {people.map((person) => {
+        const { name, age, id, userName } = person;
         return (
-          <h3>
+          <h3 key={id}>
             {name} {age}
+            {userName}
           </h3>
         );
       })}
