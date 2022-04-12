@@ -4,41 +4,45 @@ import { info } from "./data";
 
 const Test = () => {
   const [userName, setUserName] = useState("");
-  const [people, setPeople] = useState(info);
+  const [age, setAge] = useState("");
+  const [people, setPeople] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const handlerSubmit = (e) => {
     e.preventDefault();
     if (userName) {
-      setPeople([...people, { id: Math.random().toString(), userName }]);
       setShowModal(!showModal);
+      setPeople([...people, { id: Math.random().toString(), userName, age }]);
       setUserName("");
+      setAge("");
     }
     setShowModal(!showModal);
-  };
-
-  const handlerChange = (e) => {
-    setUserName(e.target.value);
   };
 
   return (
     <>
       {showModal && <Modal />}
       <form onSubmit={handlerSubmit}>
+        <label htmlFor={userName}>Name</label>
         <input
           type="text"
           value={userName}
-          name="username"
-          onChange={handlerChange}
+          name="userName"
+          onChange={(e) => setUserName(e.target.value)}
+        />
+        <label htmlFor={age}>Age</label>
+        <input
+          type="text"
+          value={age}
+          name="age"
+          onChange={(e) => setAge(e.target.value)}
         />
         <button type="sumit">click</button>
       </form>
       {people.map((person) => {
-        const { name, age, id, userName } = person;
         return (
-          <h3 key={id}>
-            {name} {age}
-            {userName}
+          <h3 id={person.id}>
+            {person.userName} {person.age}
           </h3>
         );
       })}
