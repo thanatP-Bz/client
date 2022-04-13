@@ -9,7 +9,7 @@ const reducer = (state, action) => {
       alrtText: "Please provide all value",
     };
   }
-  throw new Error(`no such action ${action.type}`);
+  throw new Error(`no such action : ${action.type}`);
 };
 
 export default reducer;

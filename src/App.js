@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Landing, Register, Dashboard, Error } from "./pages";
-import Test from "./test/Test";
 
 function App() {
   return (
@@ -13,7 +12,6 @@ function App() {
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
-      <Test />
     </>
   );
 }
