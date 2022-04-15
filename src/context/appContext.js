@@ -1,6 +1,6 @@
-import React, { useReducer, useContext } from "react";
+import React, { useContext, useReducer, useState } from "react";
 import reducer from "./reducer";
-import { DISPLAY_ALERT, CLEAR_ALERT } from "./actions";
+import { DISPLAY_ALERT, CLEAR_ALERT } from "./action";
 
 const initialState = {
   isLoading: false,
@@ -24,9 +24,8 @@ const AppProvider = ({ children }) => {
       dispatch({ type: CLEAR_ALERT });
     }, 3000);
   };
-
   return (
-    <AppContext.Provider value={{ ...state, displayAlert }}>
+    <AppContext.Provider value={{ ...state, displayAlert, clearAlert }}>
       {children}
     </AppContext.Provider>
   );
@@ -36,4 +35,4 @@ const useAppContext = () => {
   return useContext(AppContext);
 };
 
-export { AppProvider, initialState, useAppContext };
+export { initialState, AppProvider, useAppContext };
