@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { Logo, FormRow, Alert } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
-<<<<<<< HEAD
-import { useAppContext } from "../context/AppContext";
-=======
 import { useAppContext } from "../context/appContext";
->>>>>>> 103911dbfb12a9c2ac7f0a06ee9df531e605be41
 
 const intialState = {
   name: "",
@@ -19,11 +15,7 @@ const Register = () => {
   const [values, setValues] = useState(intialState);
 
   //gobal state and useNavigate
-<<<<<<< HEAD
-  const { isLoading, showAlert, displayAlert, clearAlert } = useAppContext();
-=======
   const { isLoading, showAlert, displayAlert } = useAppContext();
->>>>>>> 103911dbfb12a9c2ac7f0a06ee9df531e605be41
 
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
@@ -35,20 +27,13 @@ const Register = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-    const { email, password, name, isMember } = values;
-=======
     const { name, email, password, isMember } = values;
->>>>>>> 103911dbfb12a9c2ac7f0a06ee9df531e605be41
     if (!email || !password || (!isMember && !name)) {
       displayAlert();
       return;
     }
-<<<<<<< HEAD
-    clearAlert();
-=======
+
     console.log(values);
->>>>>>> 103911dbfb12a9c2ac7f0a06ee9df531e605be41
   };
 
   return (
