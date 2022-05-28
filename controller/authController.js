@@ -1,7 +1,18 @@
 import User from "../model/auth.js";
-import { StatusCodes } from "http-status-codes";
+import { BadRequestError } from "../error/index.js";
 
 const register = async (req, res) => {
+  const { name, email, password } = req.body;
+
+  if (!name || !email || !password) {
+    throw new BadRequestError("please provide all value");
+  }
+
+  const userAlreadyExist = await User.findOne({ email });
+  if (userAlreadyExist) {
+    throw new BadRequestError("this has already in use");
+  }
+
   const user = await User.create(req.body);
   res.status(StatusCodes.OK).json({ user });
 };
